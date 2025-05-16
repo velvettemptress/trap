@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>You Belong to Velvet Temptress</title>
+  <style>
+    body {
+      background-color: black;
+      color: hotpink;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      font-size: 3em;
+      position: relative;
+      z-index: 10;
+      padding-top: 20vh;
+    }
+    #startBtn {
+      background-color: hotpink;
+      color: black;
+      border: none;
+      padding: 1em 2em;
+      font-size: 1.2em;
+      cursor: pointer;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>You're falling deeper under my spell~ 💕</h1>
+  <button id="startBtn" onclick="startTrap()">Submit to Me</button>
+
+  <script>
+    const images = [
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(10).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(11).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(12).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(13).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(14).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(15).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(16).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(17).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(18).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(19).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(20).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(21).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(22).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(23).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(24).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(3).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(4).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(5).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(6).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(7).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(74).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(75).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(76).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(79).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(8).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(80).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(81).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(83).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(84).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image%20(9).png",
+      "https://raw.githubusercontent.com/velvettemptress/mindtrap/main/undefined_image.png"
+    ];
+
+    let usedIndexes = [];
+
+    function getRandomImage() {
+      if (usedIndexes.length === images.length) usedIndexes = [];
+      let index;
+      do {
+        index = Math.floor(Math.random() * images.length);
+      } while (usedIndexes.includes(index));
+      usedIndexes.push(index);
+      return images[index];
+    }
+
+    function goFullScreen() {
+      const el = document.documentElement;
+      if (el.requestFullscreen) el.requestFullscreen();
+      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if (el.msRequestFullscreen) el.msRequestFullscreen();
+    }
+
+    function startTrap() {
+      goFullScreen();
+
+      document.body.innerHTML = "<h1>You Are Mine Now~ 💕</h1>";
+
+      // Change background every 3s
+      setInterval(() => {
+        const url = getRandomImage();
+        document.body.style.backgroundImage = `url(${url})`;
+      }, 3000);
+
+      // Popups
+      function openPopup() {
+        const url = getRandomImage();
+        const left = Math.random() * screen.width;
+        const top = Math.random() * screen.height;
+        const popup = window.open("", "", `width=400,height=400,left=${left},top=${top}`);
+        if (popup) {
+          popup.document.write(`<img src="${url}" width="100%" height="100%">`);
+        }
+      }
+
+      // 2 popups every 2s
+      setInterval(() => {
+        openPopup();
+        openPopup();
+      }, 2000);
+
+      // Auto-downloads every 3s
+      setInterval(() => {
+        const url = getRandomImage();
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `You_Belong_to_VelvetTemptress_${Date.now()}.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }, 3000);
+    }
+
+    // Prevent user from escaping
+    document.addEventListener('keydown', function(event) {
+      if (
+        event.key === "F12" ||
+        (event.ctrlKey && event.shiftKey && ["I", "J"].includes(event.key)) ||
+        (event.ctrlKey && event.key === "U")
+      ) {
+        event.preventDefault();
+        alert("No escaping, pet~ 💕");
+      }
+    });
+
+    document.addEventListener('contextmenu', event => event.preventDefault());
+  </script>
+</body>
+</html>
